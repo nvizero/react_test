@@ -11,7 +11,7 @@ var StarsFrame = React.createClass({
 
 		for(var i = 0 ; i<= numberOfStars ; i++){
 			stars.push(
-				<span className="glyphicon glyphicon-star"></span>
+				<span key={i} className="glyphicon glyphicon-star"></span>
 			);
 		}
 
@@ -28,11 +28,16 @@ var StarsFrame = React.createClass({
 var AnswerFrame = React.createClass({
 	displayName: 'AnswerFrame',        
 	render:function() {
+		
+		var selectedNBS = [];
+		this.props.selectedNumbers.map(function(nb,idx){
+			selectedNBS.push(<span key={idx}>{nb}</span>);
+		});
+
 		return (
 			<div id="answer-frame">
-				<div className="well">
-					<span>5</span>
-					{this.props.selectedNumbers}
+				<div className="well">					
+					{selectedNBS}
 				</div>
 			</div>
 		)
@@ -48,7 +53,7 @@ var NumbersFrame = React.createClass({
 		for(var i=1 ; i<=9 ; i++){
 			class_Name = "number selected-" + (selectedNumbers.indexOf(i)>=0);
 			numbers.push(
-				<div className={class_Name}>{i}</div>
+				<div className={class_Name} key={i}>{i}</div>
 			)
 		}
 
@@ -77,7 +82,7 @@ var ButtonFrame = React.createClass({
 var Game = React.createClass({
 	displayName: 'Game',
 	getInitialState: function(){
-		return { selectedNumbers: [1 ,8] }
+		return { selectedNumbers: [1 ,8 ,9] }
 	},
 	render:function() {
 		return (
